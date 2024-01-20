@@ -1,0 +1,4 @@
+<!-- src/app/content-card/content-card.component.html -->
+<div *ngFor="let item of contentList.content">
+    <div [innerHTML]="contentList.displayItem(contentList.content.indexOf(item))"></div>
+  </div>

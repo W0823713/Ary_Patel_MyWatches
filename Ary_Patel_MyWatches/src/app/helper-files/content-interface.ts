@@ -1,4 +1,4 @@
-// helper-files/content-interface.ts
+/* // helper-files/content-interface.ts
 
  export interface Content {
     id: number;
@@ -11,4 +11,4 @@
   }
   
   
-  
+   */

@@ -1,0 +1,11 @@
+<!-- content-list.component.html -->
+<div *ngFor="let content of contentArray; let first = first" class="content-card" [ngClass]="{'first-card': first}">
+    <h2>{{ content.title }}</h2>
+    <img *ngIf="content.image" src="{{ content.image }}" (click)="handleImageClick(content.id, content.title)" />
+    <p *ngIf="content.description">{{ content.description }}</p>
+    <p *ngIf="content.creator">{{ content.creator }}</p>
+    <p *ngIf="content.type">{{ content.type }}</p>
+    <ul *ngIf="content.tags && content.tags.length > 0">
+      <li *ngFor="let tag of content.tags">{{ tag }}</li>
+    </ul>
+  </div>

@@ -1,4 +1,4 @@
-// src/app/helper-files/content-list.ts
+/* // src/app/helper-files/content-list.ts
 import { Content } from './content-interface';
 
 export class ContentList {
@@ -35,4 +35,4 @@ export class ContentList {
       </div>
     `;
   }
-}
+} */

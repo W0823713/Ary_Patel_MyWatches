@@ -1,11 +1,20 @@
-<!-- content-list.component.html -->
-<div *ngFor="let content of contentArray; let first = first" class="content-card" [ngClass]="{'first-card': first}">
-    <h2>{{ content.title }}</h2>
-    <img *ngIf="content.image" src="{{ content.image }}" (click)="handleImageClick(content.id, content.title)" />
-    <p *ngIf="content.description">{{ content.description }}</p>
-    <p *ngIf="content.creator">{{ content.creator }}</p>
-    <p *ngIf="content.type">{{ content.type }}</p>
-    <ul *ngIf="content.tags && content.tags.length > 0">
-      <li *ngFor="let tag of content.tags">{{ tag }}</li>
-    </ul>
+<!-- src/app/content-list/content-list.component.html -->
+<div>
+    <label for="titleToSearchFor">Title search:</label>
+    <input type="text" id="titleToSearchFor" [(ngModel)]="searchTitle" autofocus>
+    <button (click)="searchContent()">Search by Title</button>
+  </div>
+  
+  <div class="title-error" [style.color]="searchResult === 'Content found!' ? 'green' : 'red'">
+    {{ searchResult }}
+  </div>
+  
+  <!-- Display the content list with a loop -->
+  <div *ngFor="let type of ['Sporty', 'Collection', 'Smart']">
+    <h2>{{ type }} List</h2>
+    <div *ngFor="let content of contentItems | contentFilter: type" [class]="content.type">
+      <div [class.highlight]="searchResult === content.title">
+        <app-content-card [content]="content"></app-content-card>
+      </div>
+    </div>
   </div>

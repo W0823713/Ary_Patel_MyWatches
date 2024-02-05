@@ -1,14 +1,14 @@
-/* // helper-files/content-interface.ts
+ // helper-files/content-interface.ts
 
  export interface Content {
     id: number;
     title: string;
     description: string;
     creator: string;
-    imgURL?: string;
+    img?: string;
     type?: string;
     tags?: string[];
   }
   
   
-   */
+   

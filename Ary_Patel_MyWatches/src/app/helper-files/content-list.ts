@@ -1,4 +1,4 @@
-/* // src/app/helper-files/content-list.ts
+ // src/app/helper-files/content-list.ts
 import { Content } from './content-interface';
 
 export class ContentList {
@@ -23,16 +23,16 @@ export class ContentList {
       return "<p>Error: Index out of range</p>";
     }
 
-    const { title, description, creator, imgURL, type } = this.contentArray[index];
+    const { title, description, creator, img, type } = this.contentArray[index];
 
     return `
       <div>
         <h3>${title}</h3>
         <p>${description}</p>
         <p>Creator: ${creator}</p>
-        <img src="${imgURL || ''}" alt="Image" />
+        <img src="${img || ''}" alt="Image" />
         <p>Type: ${type || ''}</p>
       </div>
     `;
   }
-} */
+} 

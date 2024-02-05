@@ -1,0 +1,16 @@
+/* src/app/content-card/content-card.component.css */
+.content-card {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .first-card {
+    border: 2px solid #000;
+  }
+  
+  .card-header {
+    font-size: 18px;
+    font-weight: bold;
+  }

@@ -1,4 +1,11 @@
 <!-- src/app/content-card/content-card.component.html -->
-<div *ngFor="let item of contentList.content">
-    <div [innerHTML]="contentList.displayItem(contentList.content.indexOf(item))"></div>
+<!-- src/app/content-card/content-card.component.html -->
+<div class="content-card" [ngClass]="{'first-card': content.id === 1}">
+    <div class="card-header">{{ content.title }}</div>
+    <img [src]="content.img" alt="Content Image" (click)="imageClick.emit()" />
+
+    <p *ngIf="content.description">Description: {{ content.description }}</p>
+    <p *ngIf="content.creator">Creator: {{ content.creator }}</p>
+    <p *ngIf="content.type">Type: {{ content.type }}</p>
+    <p *ngIf="content.tags && content.tags.length > 0">Tags: {{ content.tags.join(', ') }}</p>
   </div>

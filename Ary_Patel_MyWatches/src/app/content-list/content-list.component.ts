@@ -1,5 +1,4 @@
-
- // src/app/content-list/content-list.component.ts
+// src/app/content-list/content-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 
@@ -76,7 +75,7 @@ export class ContentListComponent implements OnInit {
     {
       id: 8,
       title: 'Adventure Sports Watch',
-      img: 'assets/Image/download-1.jpg',
+     
       description: 'Designed for adventure enthusiasts, durable and reliable.',
       creator: 'Adventure Gear Watches',
       type: 'Sporty',
@@ -85,13 +84,12 @@ export class ContentListComponent implements OnInit {
     
     // Add more content items as needed
   ];
-  searchTitle: string = ''; // Add this line
-  searchResult: string = ''; // Add this line
-  authorToSearch: string = ''; // Add this line
-  authorSearchMessage: { found: boolean, message: string } = { found: false, message: '' }; // Add this line
+  searchTitle: string = ''; 
+  searchResult: string = ''; 
+  authorToSearch: string = ''; 
+  authorSearchMessage: { found: boolean, message: string } = { found: false, message: '' }; 
 
-  // Add the searchContent method
-// Update the searchContent method
+  //  searchContent method
 searchContent() {
   const searchTerm = this.searchTitle.toLowerCase(); // Convert to lowercase for case-insensitivity
   this.searchResult = this.contentItems.some(content => content.title.toLowerCase().includes(searchTerm))
@@ -102,4 +100,4 @@ searchContent() {
 constructor() {}
 
   ngOnInit(): void {}
-}  
+}  //

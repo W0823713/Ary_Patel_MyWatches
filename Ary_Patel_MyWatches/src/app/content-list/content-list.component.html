@@ -1,4 +1,6 @@
 <!-- src/app/content-list/content-list.component.html -->
+<app-create-content (contentCreated)="onContentCreated($event)"></app-create-content>
+<br>
 <div>
     <label for="titleToSearchFor">Title search:</label>
     <input type="text" id="titleToSearchFor" [(ngModel)]="searchTitle" autofocus>

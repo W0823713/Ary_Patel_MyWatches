@@ -20,16 +20,16 @@ export class HoverAffectDirective {
       this.renderer.setStyle(this.el.nativeElement, 'text-decoration', 'underline');
       this.renderer.setStyle(this.el.nativeElement, 'font-weight', 'bold');
 
-      // Bonus: Check if it's the first or last card
+     
       if (this.el.nativeElement.parentElement.firstElementChild === this.el.nativeElement ||
           this.el.nativeElement.parentElement.lastElementChild === this.el.nativeElement) {
-        this.renderer.setStyle(this.el.nativeElement, 'border', '2px solid red'); // Example border style
+        this.renderer.setStyle(this.el.nativeElement, 'border', '2px solid red'); 
       
       }
     } else {
         
       this.renderer.removeStyle(this.el.nativeElement, 'text-decoration');
-      this.renderer.removeStyle(this.el.nativeElement, 'border'); // Remove border style
+      this.renderer.removeStyle(this.el.nativeElement, 'border'); 
       this.renderer.removeStyle(this.el.nativeElement, 'font-weight');
      
     }

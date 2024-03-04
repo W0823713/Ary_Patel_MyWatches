@@ -1,0 +1,25 @@
+<!-- create-content.component.html -->
+<div>
+    <label for="contentId">ID:</label>
+    <input type="number" id="contentId" [(ngModel)]="newContent.id">
+  </div>
+  <div>
+    <label for="contentTitle">Title:</label>
+    <input type="text" id="contentTitle" [(ngModel)]="newContent.title">
+  </div>
+  <div>
+    <label for="contentDescription">Description:</label>
+    <input type="text" id="contentDescription" [(ngModel)]="newContent.description">
+  </div>
+  <div>
+    <label for="contentCreator">Creator:</label>
+    <input type="text" id="contentCreator" [(ngModel)]="newContent.creator">
+  </div>
+  <div>
+    <label for="contentType">Type:</label>
+    <input type="text" id="contentType" [(ngModel)]="newContent.type">
+  </div>
+  <!-- Add other necessary fields here -->
+
+  <button (click)="createContent()">Create Content</button>
+  <div *ngIf="errorMessage" style="color: red; font-weight: bold;">{{ errorMessage }}</div>

@@ -97,6 +97,14 @@ searchContent() {
     : 'Content not found.';
 }
 
+onContentCreated(newContent: Content) {
+  // Assign a new reference to contentItems
+  this.contentItems = [...this.contentItems, newContent];
+  // Log success message
+  console.log(`Content '${newContent.title}' added successfully.`);
+
+}
+
 constructor() {}
 
   ngOnInit(): void {}

@@ -27,10 +27,10 @@ export class CreateContentComponent {
       return;
     }
 
-    // Emit content if all fields are filled
+
     this.errorMessage = '';
     this.contentCreated.emit(this.newContent);
-    // Clear input fields
+    
     this.newContent = {
       id: null,
       title: '',

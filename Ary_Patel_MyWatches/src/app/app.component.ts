@@ -10,7 +10,7 @@ import { MessagesService } from './messages.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'My App';
+  title = 'Arya App';
   singleContentItem: Content | undefined;
   contentId: number | undefined;
   messages: string[] = [];

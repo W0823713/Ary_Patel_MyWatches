@@ -24,6 +24,5 @@ export class AppMessagesComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // No need to unsubscribe since we're using async pipe in the template
   }
 }

@@ -1,0 +1,27 @@
+<div class="modify-content">
+    <h2 class="form-title">Assignment - 7 -  AryPatel</h2>
+    <div class="modify-content-form">
+      <label for="contentId">ID:</label>
+      <input type="number" id="contentId" [(ngModel)]="newContent.id">
+    
+      <label for="contentTitle">Title:</label>
+      <input type="text" id="contentTitle" [(ngModel)]="newContent.title">
+    
+      <label for="contentDescription">Description:</label>
+      <input type="text" id="contentDescription" [(ngModel)]="newContent.description">
+    
+      <label for="contentCreator">Creator:</label>
+      <input type="text" id="contentCreator" [(ngModel)]="newContent.creator">
+    
+      <label for="contentType">Type:</label>
+      <input type="text" id="contentType" [(ngModel)]="newContent.type">
+  
+      <!-- Add other necessary fields here -->
+    
+      <button (click)="modifyContent()">
+        {{ isUpdating ? 'Update Content' : originalButtonText }}
+      </button>
+    
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+  </div>

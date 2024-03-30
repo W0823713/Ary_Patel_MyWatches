@@ -17,6 +17,10 @@ export class ContentListComponent implements OnInit {
   constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
+    this.loadContentItems();
+  }
+
+  loadContentItems(): void {
     this.contentService.getContentArray().subscribe(contentArray => {
       this.contentItems = contentArray;
     });
@@ -29,8 +33,11 @@ export class ContentListComponent implements OnInit {
       : 'Content not found.';
   }
 
-  onContentCreated(newContent: Content) {
-    this.contentItems = [...this.contentItems, newContent];
-    console.log(`Content '${newContent.title}' added successfully.`);
+  onContentAdded(newContent: Content) {
+    // Push the new content into the contentItems array
+    this.contentItems.push(newContent);
+    // Refresh the content list after adding new content
+    this.loadContentItems();
+    console.log(`Content '${newContent.title}' added successfully.`); // Corrected syntax
   }
 }

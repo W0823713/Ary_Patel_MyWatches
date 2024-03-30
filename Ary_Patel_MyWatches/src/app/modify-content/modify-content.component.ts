@@ -8,105 +8,98 @@ import { ContentService } from '../content.service';
   styleUrls: ['./modify-content.component.scss']
 })
 export class ModifyContentComponent {
-  newContent: Content = { id: null, title: '', description: '', creator: '', type: '' };
+  newContent: Content = {
+    id: null,
+    title: '',
+    description: '',
+    creator: '',
+    type: ''
+    // Add other necessary fields here
+  };
+  contentId: number | null = null;
   errorMessage: string = '';
-  isUpdating: boolean = false; // Flag to indicate if we're updating existing content
-  originalButtonText: string = 'Modify Content'; // Original button text
+  buttonText: string = 'Add Content'; // Default button text
+  contentList: Content[] = []; // Array to store content list
 
-  @Output() contentCreated: EventEmitter<Content> = new EventEmitter<Content>(); // Emit content when created or modified
+  @Output() contentAdded: EventEmitter<Content> = new EventEmitter<Content>();
 
-  constructor(private contentService: ContentService) {}
+  constructor(private contentService: ContentService) {
+    this.loadContentList();
+  }
 
-  modifyContent(): void {
-    if (!this.isValidContent(this.newContent)) {
-      this.errorMessage = 'Please fill out all fields.';
-      return;
-    }
+  loadContentList(): void {
+    this.contentService.getContentArray()
+      .subscribe(contentArray => {
+        this.contentList = contentArray;
+      });
+  }
 
-    if (this.newContent.id && !this.isUpdating) {
-      // Check if content exists at provided ID
-      this.contentService.getContentById(this.newContent.id).subscribe(
-        existingContent => {
-          if (existingContent) {
-            // Change button text to indicate updating existing content
-            this.originalButtonText = 'Update Existing Content';
-            this.isUpdating = true;
-          } else {
-            // If content doesn't exist at provided ID, proceed with adding new content
-            this.addOrUpdateContent();
-          }
-        },
-        error => {
-          this.errorMessage = 'Error retrieving content. Please try again.';
-          console.error('Error retrieving content:', error);
-        }
-      );
+  addOrUpdateContent(): void {
+    if (!this.contentId) {
+      this.addContent();
     } else {
-      // If id is not provided or isUpdating is true, proceed with adding or updating content
-      this.addOrUpdateContent();
+      this.updateContent();
     }
   }
 
-  private addOrUpdateContent(): void {
-    if (this.isUpdating) {
-      // Updating existing content
-      this.contentService.updateContent(this.newContent).subscribe(
-        () => {
-          this.errorMessage = ''; // Clear error message
-          
-          // Update the existing content in the content list
-          const updatedContentList = this.contentService.getContentList().map(content => {
-            if (content.id === this.newContent.id) {
-              return { ...this.newContent };
-            }
-            return content;
-          });
-          this.contentService.updateContentList(updatedContentList); // Update content list
-
-          this.contentService.clearMessages(); // Clear messages
-          this.isUpdating = false; // Reset updating flag
-          this.originalButtonText = 'Modify Content'; // Reset button text
-          this.clearFields(); // Clear input fields
-
-          // Emit the new content object
-          this.contentCreated.emit(this.newContent);
-        },
-        error => {
-          this.errorMessage = 'Failed to update content. Please try again.'; // Display error message
-          console.error('Error updating content:', error);
-        }
-      );
-    } else {
-      // Adding new content
-      this.contentService.addContent(this.newContent).subscribe(
-        () => {
-          this.errorMessage = ''; // Clear error message
-          
-          // Add the newly created content to the content list
-          const updatedContentList = [...this.contentService.getContentList(), { ...this.newContent }];
-          this.contentService.updateContentList(updatedContentList); // Update content list
-
-          this.clearFields(); // Clear input fields
-
-          // Emit the new content object
-          this.contentCreated.emit(this.newContent);
-        },
-        error => {
-          this.errorMessage = 'Failed to add content. Please try again.'; // Display error message
-          console.error('Error adding content:', error);
-        }
-      );
-    }
+  addContent(): void {
+    this.contentService.addContent(this.newContent)
+      .subscribe(newContentFromServer => {
+        // Emit an event with the new content
+        this.contentAdded.emit(newContentFromServer);
+        // Clear the input fields
+        this.clearFields();
+        // Update content list
+        this.loadContentList();
+      }, error => {
+        this.errorMessage = 'An error occurred while adding content: ' + error.message;
+      });
   }
 
-  private isValidContent(content: Content): boolean {
-    return content.title.trim() !== '' &&
-           content.description.trim() !== '' &&
-           content.creator.trim() !== '' &&
-           (content.type?.trim() ?? '') !== '';
+ 
+  
+  updateContent(): void {
+    this.contentService.getContentById(this.contentId as number)
+      .subscribe(existingContent => {
+        if (existingContent) {
+          // Update existing content with new values
+          existingContent.title = this.newContent.title;
+          existingContent.description = this.newContent.description;
+          existingContent.creator = this.newContent.creator;
+          existingContent.type = this.newContent.type;
+  
+          // Call the service to update the content
+          this.contentService.updateContent(existingContent)
+            .subscribe(updatedContent => {
+              // Display success message
+              this.errorMessage = 'Content updated successfully.';
+              // Change button text to "Add Content"
+              this.buttonText = 'Add Content';
+              // Clear the input fields
+              this.clearFields();
+              // Update content list locally
+              const index = this.contentList.findIndex(content => content.id === updatedContent.id);
+              if (index !== -1) {
+                this.contentList[index] = updatedContent;
+              }
+            }, error => {
+              this.errorMessage = 'An error occurred while updating content: ' + error.message;
+            });
+        } else {
+          this.errorMessage = 'Content not found with ID ' + this.contentId;
+        }
+      });
   }
-
-  private clearFields(): void {
-    this.newContent = { id: null, title: '', description: '', creator: '', type: '' };
+  clearFields(): void {
+    // Clear the newContent object and contentId
+    this.newContent = {
+      id: null,
+      title: '',
+      description: '',
+      creator: '',
+      type: ''
+      // Add other necessary fields here
+    };
+    this.contentId = null;
   }
 }

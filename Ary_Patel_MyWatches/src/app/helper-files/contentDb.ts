@@ -74,5 +74,5 @@ export const contentArray: Content[] = [
         type: 'Sporty',
         tags: ['Adventure', 'Durable', 'Sports'],
       }
-      // Add more content items as needed
+     
     ];

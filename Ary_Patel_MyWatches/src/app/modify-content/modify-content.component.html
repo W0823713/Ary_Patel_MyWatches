@@ -1,23 +1,34 @@
 <div class="modify-content">
     <h2 class="form-title">{{ buttonText }}</h2>
     <div class="modify-content-form">
-      <label for="contentId">ID:</label>
-      <input type="number" id="contentId" [(ngModel)]="contentId">
+      <mat-form-field>
+        <mat-label>ID:</mat-label>
+        <input matInput type="number" id="contentId" [(ngModel)]="contentId">
+      </mat-form-field>
   
-      <label for="contentTitle">Title:</label>
-      <input type="text" id="contentTitle" [(ngModel)]="newContent.title">
+      <mat-form-field>
+        <mat-label>Title:</mat-label>
+        <input matInput type="text" id="contentTitle" [(ngModel)]="newContent.title">
+      </mat-form-field>
   
-      <label for="contentDescription">Description:</label>
-      <input type="text" id="contentDescription" [(ngModel)]="newContent.description">
+      <mat-form-field>
+        <mat-label>Description:</mat-label>
+        <input matInput type="text" id="contentDescription" [(ngModel)]="newContent.description">
+      </mat-form-field>
   
-      <label for="contentCreator">Creator:</label>
-      <input type="text" id="contentCreator" [(ngModel)]="newContent.creator">
+      <mat-form-field>
+        <mat-label>Creator:</mat-label>
+        <input matInput type="text" id="contentCreator" [(ngModel)]="newContent.creator">
+      </mat-form-field>
   
-      <label for="contentType">Type:</label>
-      <input type="text" id="contentType" [(ngModel)]="newContent.type">
+      <mat-form-field>
+        <mat-label>Type:</mat-label>
+        <input matInput type="text" id="contentType" [(ngModel)]="newContent.type">
+      </mat-form-field>
   
-      <button (click)="addOrUpdateContent()">{{ contentId ? 'Update Content' : 'Add Content' }}</button>
+      <button mat-raised-button color="primary" (click)="addContent()">{{ contentId ? 'Update Content' : 'Add Content' }}</button>
   
+      <button mat-raised-button color="accent" (click)="openAddContentDialog()">Add New Content</button>
   
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>

@@ -14,8 +14,12 @@ import { ModifyContentComponent } from './modify-content/modify-content.componen
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataService } from "../app/in-memory-data.service";
-
-
+import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule here
+import { MatInputModule } from '@angular/material/input';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AddContentDialogComponent } from './add-content-dialog/add-content-dialog.component'; // Import MatInputModule here
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -27,19 +31,26 @@ import { InMemoryDataService } from "../app/in-memory-data.service";
     CreateContentComponent,
     AppMessagesComponent,
     ModifyContentComponent,
+    AddContentDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule, // Import MatButtonModule here
+    MatInputModule, // Import MatInputModule here
+    MatCardModule, // Add MatCardModule here
+  MatChipsModule, // Add MatChipsModule here
     // Configure HttpClientInMemoryWebApiModule with your InMemoryDataService
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
-      delay: 1000 // Example delay of 1 second (1000 milliseconds)
+      delay: 1000 // Example delay of 1 second (1000 milliseconds),
     })
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

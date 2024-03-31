@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Content } from '../helper-files/content-interface';
 import { ContentService } from '../content.service';
+import { AddContentDialogComponent } from '../add-content-dialog/add-content-dialog.component';
 
 @Component({
   selector: 'app-modify-content',
@@ -23,7 +25,10 @@ export class ModifyContentComponent {
 
   @Output() contentAdded: EventEmitter<Content> = new EventEmitter<Content>();
 
-  constructor(private contentService: ContentService) {
+  constructor(
+    private contentService: ContentService,
+    public dialog: MatDialog
+  ) {
     this.loadContentList();
   }
 
@@ -34,13 +39,32 @@ export class ModifyContentComponent {
       });
   }
 
-  addOrUpdateContent(): void {
-    if (!this.contentId) {
-      this.addContent();
-    } else {
-      this.updateContent();
-    }
-  }
+  openAddContentDialog(): void {
+    const dialogRef = this.dialog.open(AddContentDialogComponent, {
+      data: {
+        title: 'Add Content',
+        newContent: this.newContent
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: Content) => {
+      if (result) {
+        // Update the newContent with the result from the dialog
+        this.newContent = result;
+        // Add or update the content based on whether contentId is set
+        this.contentId ? this.updateContent() : this.addContent();
+      } else {
+        // If dialog is closed without adding content, reset newContent
+        this.newContent = {
+          id: null,
+          title: '',
+          description: '',
+          creator: '',
+          type: ''
+        };
+      }
+    });}
+
 
   addContent(): void {
     this.contentService.addContent(this.newContent)

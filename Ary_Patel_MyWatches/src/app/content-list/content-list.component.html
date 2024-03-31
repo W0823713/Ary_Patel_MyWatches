@@ -1,20 +1,17 @@
-<!--content-list.component.html-->
 <app-modify-content (contentAdded)="onContentAdded($event)"></app-modify-content>
-
-
-<!--<app-create-content (contentAdded)="onContentAdded($event)"></app-create-content> -->
 
 <br>
 <div>
-  <label for="titleToSearchFor">Title search:</label>
-  <input type="text" id="titleToSearchFor" [(ngModel)]="searchTitle" autofocus>
-  <button (click)="searchContent()">Search by Title</button>
+  <mat-form-field>
+    <mat-label>Title search:</mat-label>
+    <input matInput type="text" id="titleToSearchFor" [(ngModel)]="searchTitle" autofocus>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="searchContent()">Search by Title</button>
 </div>
 
 <div class="title-error" [style.color]="searchResult === 'Content found!' ? 'green' : 'red'">
   {{ searchResult }}
 </div>
-
 <!-- Display the content list with a loop -->
 <div *ngFor="let type of ['Sporty', 'Collection', 'Smart']">
   <h2>{{ type }} List</h2>

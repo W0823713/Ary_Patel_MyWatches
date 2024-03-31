@@ -1,20 +1,24 @@
 <!-- src/app/content-card/content-card.component.html -->
 <div class="content-card" [ngClass]="{'first-card': content.id === 1}">
-  <div class="card-header">{{ content.title }}</div>
-  <img *ngIf="content.img else defaultImage" [src]="content.img" alt="Content Image" (click)="imageClick.emit()" />
-
-  <ng-template #defaultImage>
-    <img src="assets/Image/GotoImage.jpg" alt="Default Image" />
-
-  </ng-template>
-  <p *ngIf="content.description">Description: {{ content.description }}</p>
-  <p *ngIf="content.creator">Creator: {{ content.creator }}</p>
-
-  <div appHoverAffect>
-    <p class="content-type">Type: {{ content.type }}</p>
-    <div *ngFor="let tag of content.tags">
-      <span appHoverAffect>{{ tag }}</span>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ content.title }}</mat-card-title>
+        <mat-card-subtitle *ngIf="content.creator">Creator: {{ content.creator }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image *ngIf="content.img?.length; else defaultImage" [src]="content.img" alt="Content Image" (click)="onImageClick()" />
+      <ng-template #defaultImage>
+        <img src="assets/Image/GotoImage.jpg" alt="Default Image" />
+      </ng-template>
+      <mat-card-content>
+        <p *ngIf="content.description">Description: {{ content.description }}</p>
+        <p class="content-type">Type: {{ content.type }}</p>
+        <div *ngFor="let tag of content.tags">
+          <mat-chip>{{ tag }}</mat-chip>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="onImageClick()">View Details</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-
-</div>

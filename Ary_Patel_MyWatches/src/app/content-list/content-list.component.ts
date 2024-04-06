@@ -13,8 +13,12 @@ export class ContentListComponent implements OnInit {
   searchResult: string = '';
   authorToSearch: string = '';
   authorSearchMessage: { found: boolean, message: string } = { found: false, message: '' };
+  content: Content | undefined; // Initialize it to undefined
 
-  constructor(private contentService: ContentService) {}
+  constructor(private contentService: ContentService) {
+    this.content = undefined; // or you can initialize it here
+  }
+  
 
   ngOnInit(): void {
     this.loadContentItems();
@@ -38,6 +42,6 @@ export class ContentListComponent implements OnInit {
     this.contentItems.push(newContent);
     // Refresh the content list after adding new content
     this.loadContentItems();
-    console.log(`Content '${newContent.title}' added successfully.`); // Corrected syntax
+    console.log(`Content '${newContent.title}' added successfully.`);
   }
 }

@@ -39,49 +39,6 @@ export class ModifyContentComponent {
       });
   }
 
-  openAddContentDialog(): void {
-    const dialogRef = this.dialog.open(AddContentDialogComponent, {
-      data: {
-        title: 'Add Content',
-        newContent: this.newContent
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result: Content) => {
-      if (result) {
-        // Update the newContent with the result from the dialog
-        this.newContent = result;
-        // Add or update the content based on whether contentId is set
-        this.contentId ? this.updateContent() : this.addContent();
-      } else {
-        // If dialog is closed without adding content, reset newContent
-        this.newContent = {
-          id: null,
-          title: '',
-          description: '',
-          creator: '',
-          type: ''
-        };
-      }
-    });}
-
-
-  addContent(): void {
-    this.contentService.addContent(this.newContent)
-      .subscribe(newContentFromServer => {
-        // Emit an event with the new content
-        this.contentAdded.emit(newContentFromServer);
-        // Clear the input fields
-        this.clearFields();
-        // Update content list
-        this.loadContentList();
-      }, error => {
-        this.errorMessage = 'An error occurred while adding content: ' + error.message;
-      });
-  }
-
- 
-  
   updateContent(): void {
     this.contentService.getContentById(this.contentId as number)
       .subscribe(existingContent => {
@@ -114,6 +71,70 @@ export class ModifyContentComponent {
         }
       });
   }
+
+
+  openAddContentDialog(): void {
+    const dialogRef = this.dialog.open(AddContentDialogComponent, {
+      data: {
+        title: 'Add Content',
+        newContent: this.newContent
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: Content) => {
+      if (result) {
+        // If contentId is null, it means we are adding a new content item
+        if (!this.contentId) {
+          // Update the newContent with the result from the dialog
+          this.newContent = result;
+          // Add the new content
+          this.addContent();
+        } else {
+          // If contentId is not null, it means we are updating an existing content item
+          // Update the fields of the existing content item
+          this.newContent.id = this.contentId; // Assign the contentId
+          this.newContent.title = result.title;
+          this.newContent.description = result.description;
+          this.newContent.creator = result.creator;
+          this.newContent.type = result.type;
+          // Update the existing content
+          this.updateContent();
+        }
+      } else {
+        // If dialog is closed without adding/updating content, reset newContent
+        this.newContent = {
+          id: null,
+          title: '',
+          description: '',
+          creator: '',
+          type: ''
+        };
+        // Reset contentId as well
+        this.contentId = null;
+      }
+    });
+  }
+
+  addContent(): void {
+    if (!this.contentId) {
+      // If contentId is null, add new content
+      this.contentService.addContent(this.newContent)
+        .subscribe(newContentFromServer => {
+          // Emit an event with the new content
+          this.contentAdded.emit(newContentFromServer);
+          // Clear the input fields
+          this.clearFields();
+          // Update content list
+          this.loadContentList();
+        }, error => {
+          this.errorMessage = 'An error occurred while adding content: ' + error.message;
+        });
+    } else {
+      // If contentId is not null, update existing content
+      this.updateContent();
+    }
+  }
+
   clearFields(): void {
     // Clear the newContent object and contentId
     this.newContent = {

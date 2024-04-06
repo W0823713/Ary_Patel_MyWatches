@@ -20,6 +20,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AddContentDialogComponent } from './add-content-dialog/add-content-dialog.component'; // Import MatInputModule here
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { ContentDetailComponent } from './content-detail/content-detail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { MatChipsModule } from '@angular/material/chips';
     AppMessagesComponent,
     ModifyContentComponent,
     AddContentDialogComponent,
+    ContentDetailComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

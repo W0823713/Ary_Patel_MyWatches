@@ -1,4 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #aaaaaa;
+    margin: 0;
+    padding: 0;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Navigation Bar Styles */
+.nav-bar {
+    background-color: #ffffff; /* Dark Grey */
+    color: #fff; /* White */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.nav-bar a {
+    color: #fff; /* White */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Heading Styles */
+h1, h2 {
+    text-align: center;
+}
+
+/* Content Card Styles */
+.content-card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-width: 400px; /* Set maximum width for the cards */
+    margin: 0 auto; /* Center the cards horizontally */
+}
+
+/* Card Header Styles */
+mat-card-header {
+    align-items: center;
+}
+
+.example-header-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc; /* Default color for avatar */
+}
+
+/* Card Content Styles */
+mat-card-content {
+    padding: 16px;
+}
+
+/* Card Actions Styles */
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+/* Button Styles */
+a.mat-button,
+button.mat-raised-button {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a.mat-button {
+    background-color: #ffaa00; /* Blue */
+}
+
+button.mat-raised-button {
+    background-color: #6e00a9; /* Green */
+}
+
+button.mat-raised-button[color="accent"] {
+    background-color: #004a15; /* Pink */
+}
+
+/* Form Styles */
+.modify-content-form {
+    padding: 20px;
+    background-color: #000000; /* Light Grey */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.mat-form-field {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red;
+}
+
+/* Content Type Specific Styles */
+.Sporty,
+.Collection,
+.Smart {
+    border-radius: 8px;
+    padding: 0; /* Adjust padding as needed */
+    max-width: 400px; /* Set maximum width for the cards */
+    margin: 0 auto; /* Center the cards horizontally */
+}
+
+.Sporty {
+    border: 6px solid #6c007a; /* Green */
+}
+
+.Collection {
+    border: 6px solid #620021; /* Pink */
+}
+
+.Smart {
+    border: 6px solid #ff7300; /* Blue */
+}
+
+/* Highlight Styles */
+.highlight {
+    border: 2px solid #ff4081; /* Pink */
+    border-radius: 8px;
+}
+
+/* Page Not Found Styles */
+.page-not-found {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Back to List Link Styles */
+a.routerLink {
+    color: #2196f3; /* Blue */
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+a.routerLink:hover {
+    text-decoration: underline;
+}
+
+.search-content-form {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light Grey */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto; /* Center the box horizontally */
+}
+
+.navigation-bar {
+    background-color: #333; /* Dark Grey */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navigation-bar a {
+    color: #fff; /* White */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navigation-bar a.active {
+    text-decoration: underline;
+}
+/* Layout Adjustments */
+.content-card {
+    max-width: 600px; /* Adjust maximum width */
+    margin: 20px auto; /* Adjust margin for centering */
+}
+
+.modify-content-form,
+.search-content-form {
+    max-width: 500px; /* Adjust maximum width */
+    margin: 20px auto; /* Center the box horizontally */
+}
+
+.navigation-bar {
+    padding: 15px 0; /* Adjust padding */
+}
+
+/* Typography Adjustments */
+body {
+    font-family: "Arial", sans-serif; /* Change font family */
+    font-size: 16px; /* Adjust base font size */
+    line-height: 1.6; /* Adjust line height */
+}
+
+h1 {
+    font-size: 28px; /* Adjust font size for h1 */
+}
+
+h2 {
+    font-size: 24px; /* Adjust font size for h2 */
+}
+
+.nav-bar a,
+.navigation-bar a {
+    font-size: 16px; /* Adjust font size for navigation links */
+}
+
+.mat-form-field {
+    font-size: 16px; /* Adjust font size for form fields */
+}
+
+.error-message {
+    font-size: 14px; /* Adjust font size for error messages */
+}

@@ -25,12 +25,17 @@ export class ContentService {
   }
 
   getContentById(id: number): Observable<Content | undefined> {
-    const url = `${this.contentUrl}/${id}`; // Syntax error corrected here
+    const url = `${this.contentUrl}/${id}`;
     return this.http.get<Content>(url)
       .pipe(
-        tap(_ => this.messagesService.addMessage(`Content item at id: ${id}`)), // Syntax error corrected here
+        tap(_ => this.messagesService.addMessage(`Content item at id: ${id}`)),
         catchError(this.handleError<Content>('getContentById'))
       );
+  }
+
+  getContentItem(id: number): Observable<Content>{
+    console.log("Retrieving OBSERVABLE content item");
+    return this.http.get<Content>("api/content/" + id);
   }
 
   addContent(content: Content): Observable<Content> {
@@ -41,11 +46,11 @@ export class ContentService {
         content.id = newId;
         return content;
       }),
-      tap(_ => this.messagesService.addMessage(`Generated new id for content: ${content.id}`)), // Syntax error corrected here
+      tap(_ => this.messagesService.addMessage(`Generated new id for content: ${content.id}`)),
       switchMap((newContent: Content) => 
         this.http.post<Content>(this.contentUrl, newContent, this.httpOptions)
           .pipe(
-            tap(_ => this.messagesService.addMessage(`Added new content with id ${newContent.id}`)), // Syntax error corrected here
+            tap(_ => this.messagesService.addMessage(`Added new content with id ${newContent.id}`)),
             catchError(this.handleError<Content>('addContent'))
           )
       )
@@ -53,10 +58,10 @@ export class ContentService {
   }
 
   updateContent(content: Content): Observable<Content> {
-    const url = `${this.contentUrl}/${content.id}`; // Syntax error corrected here
+    const url = `${this.contentUrl}/${content.id}`;
     return this.http.put<Content>(url, content, this.httpOptions)
       .pipe(
-        tap(_ => this.messagesService.addMessage(`Updated content with id ${content.id}`)), // Syntax error corrected here
+        tap(_ => this.messagesService.addMessage(`Updated content with id ${content.id}`)),
         catchError(this.handleError<Content>('updateContent'))
       );
   }
@@ -64,7 +69,7 @@ export class ContentService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      this.messagesService.addMessage(`${operation} failed: ${error.message}`); // Syntax error corrected here
+      this.messagesService.addMessage(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }

@@ -1,12 +1,12 @@
-<!-- src/app/content-card/content-card.component.html -->
-<div class="content-card" [ngClass]="{'first-card': content.id === 1}">
+<!-- content-detail.component.html -->
+<div class="content-card" *ngIf="content">
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{ content.title }}</mat-card-title>
         <mat-card-subtitle *ngIf="content.creator">Creator: {{ content.creator }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image *ngIf="content.img?.length; else defaultImage" [src]="content.img" alt="Content Image" (click)="onImageClick()" />
+      <img mat-card-image *ngIf="content.img; else defaultImage" [src]="content.img" alt="Content Image" />
       <ng-template #defaultImage>
         <img src="assets/Image/GotoImage.jpg" alt="Default Image" />
       </ng-template>
@@ -16,9 +16,9 @@
         <div *ngFor="let tag of content.tags">
           <mat-chip>{{ tag }}</mat-chip>
         </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button [routerLink]="['/content', content.id]">View Details</a>
-    </mat-card-actions>
-  </mat-card>
-</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button [routerLink]="['/content']">Back to List</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
